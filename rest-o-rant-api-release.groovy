@@ -12,26 +12,26 @@ def server(type, title) {
     }
     cis.get(0)
 }
+def artifactversion = releaseVariables['version']
+
 def server1 = server('xldeploy.XLDeployServer','XebiaLabs internal')
 xlr {
   release('Release rest-o-rant-api') {
     variables {
-      stringVariable('version') {
-        
-      }
+      stringVariable('version', artifactversion)
     }
     description 'Release template for demo'
-    scheduledStartDate Date.parse("yyyy-MM-dd'T'HH:mm:ssZ", '2016-11-23T07:30:00+0000')
+    scheduledStartDate Date.parse("yyyy-MM-dd'T'HH:mm:ssZ", '2017-11-23T07:30:00+0000')
     phases {
       phase('Preparation Phase') {
         description 'Prepare the whole project'
-        scheduledStartDate Date.parse("yyyy-MM-dd'T'HH:mm:ssZ", '2016-11-23T07:30:00+0000')
-        dueDate Date.parse("yyyy-MM-dd'T'HH:mm:ssZ", '2016-11-25T07:30:00+0000')
+        scheduledStartDate Date.parse("yyyy-MM-dd'T'HH:mm:ssZ", '2017-11-23T07:30:00+0000')
+        dueDate Date.parse("yyyy-MM-dd'T'HH:mm:ssZ", '2017-11-25T07:30:00+0000')
         tasks {
           gate('Prepare release') {
             description 'Prepare all release plan'
             owner 'John'
-            dueDate Date.parse("yyyy-MM-dd'T'HH:mm:ssZ", '2016-05-03T07:30:00+0000')
+            dueDate Date.parse("yyyy-MM-dd'T'HH:mm:ssZ", '2017-05-03T07:30:00+0000')
             team 'Dev Team'
             conditions {
               condition('Acceptance Testing Done')
@@ -42,20 +42,20 @@ xlr {
           manual('Organize team meeting') {
             description 'Ensures Dev & QA are aligned on the release'
             owner 'John'
-            dueDate Date.parse("yyyy-MM-dd'T'HH:mm:ssZ", '2016-05-03T07:30:00+0000')
+            dueDate Date.parse("yyyy-MM-dd'T'HH:mm:ssZ", '2017-05-03T07:30:00+0000')
             team 'Dev Team'
           }
         }
       }
       phase('Deployment phase') {
         description 'Development phase'
-        scheduledStartDate Date.parse("yyyy-MM-dd'T'HH:mm:ssZ", '2016-11-25T07:30:00+0000')
-        dueDate Date.parse("yyyy-MM-dd'T'HH:mm:ssZ", '2016-11-25T22:00:00+0000')
+        scheduledStartDate Date.parse("yyyy-MM-dd'T'HH:mm:ssZ", '2017-11-25T07:30:00+0000')
+        dueDate Date.parse("yyyy-MM-dd'T'HH:mm:ssZ", '2017-11-25T22:00:00+0000')
         tasks {
           custom('Deploy to production') {
             description 'Start Deployment on XLD for production'
             owner 'David'
-            dueDate Date.parse("yyyy-MM-dd'T'HH:mm:ssZ", '2016-05-06T15:30:00+0000')
+            dueDate Date.parse("yyyy-MM-dd'T'HH:mm:ssZ", '2017-05-06T15:30:00+0000')
             script {
               type 'xldeploy.Deploy'
               server server1
