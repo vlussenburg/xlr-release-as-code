@@ -19,7 +19,9 @@ xlr {
   release('Release rest-o-rant-api') {
     variables {
       stringVariable('version', artifactversion)
+      stringVariable('sourceTemplate', 'https://github.com/vlussenburg/xlr-release-as-code/edit/master/rest-o-rant-api-release.groovy')
     }
+      
     description 'Release template for demo'
     scheduledStartDate Date.parse("yyyy-MM-dd'T'HH:mm:ssZ", '2017-11-23T07:30:00+0000')
     phases {
